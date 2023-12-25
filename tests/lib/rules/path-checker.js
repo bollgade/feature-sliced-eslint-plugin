@@ -16,16 +16,43 @@ const rule = require("../../../lib/rules/path-checker"),
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+  parserOptions: {ecmaVersion: 6, sourceType: 'module'}
+});
 ruleTester.run("path-checker", rule, {
   valid: [
-    // give me some code that won't trigger a warning
+    {
+      filename: 'P:\\Folder\\lang\\Web\\production-project\\src\\entities\\Article',
+      code: "import { Article } from '../../ui/ArticleList/ArticleList'",
+      errors: [{ message: "Within one slice paths should be relative" }],
+    },
+    {
+      filename: '/Users/bollgade/dev/Blog_pet-React/src/entities/Article/ui/Article.tsx',
+      code: "import { Article } from '../../ui/ArticleList/ArticleList'",
+      errors: [{ message: "Within one slice paths should be relative" }],
+    },
   ],
 
   invalid: [
     {
-      code: "",
-      errors: [{ message: "Fill me in.", type: "Me too" }],
+      filename: 'P:\\Folder\\lang\\Web\\production-project\\src\\entities\\Article',
+      code: "import { Article } from 'entities/Article/ui/ArticleList/ArticleList'",
+      errors: [{ message: "Within one slice paths should be relative" }],
+    },
+    {
+      filename: '/Users/bollgade/dev/Blog_pet-React/src/entities/Article/ui/Article.tsx',
+      code: "import { Article } from 'entities/Article/ui/ArticleList/ArticleList'",
+      errors: [{ message: "Within one slice paths should be relative" }],
+    },
+    {
+      filename: '/Users/bollgade/dev/Blog_pet-React/src/entities/Article/ui/Article.tsx',
+      code: "import { Article } from '@entities/Article/ui/ArticleList/ArticleList'",
+      errors: [{ message: "Within one slice paths should be relative" }],
+      options: [{
+        alias: '@'
+      }]
     },
   ],
 });
+
+// /Users/bollgade/dev/Blog_pet-React.ts/src/widgets/ThemeSwitcher/ui/ThemeSwitcher.tsx
