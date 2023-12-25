@@ -22,27 +22,29 @@ Add `feature-sliced` to the plugins section of your `.eslintrc` configuration fi
 
 ```json
 {
-    "plugins": [
-        "feature-sliced"
-    ]
+  "plugins": ["feature-sliced"]
 }
 ```
-
 
 Then configure the rules you want to use under the rules section.
 
 ```json
 {
-    "rules": {
-        "feature-sliced/rule-name": 2
-    }
+  "rules": {
+    "feature-sliced/path-checker": [
+      "error",
+      {
+        "alias": "@"
+      }
+    ]
+  }
 }
 ```
 
 ## Rules
 
 <!-- begin auto-generated rules list -->
-TODO: Run eslint-doc-generator to generate the rules list.
+
+- `path-checker`
+
 <!-- end auto-generated rules list -->
-
-
