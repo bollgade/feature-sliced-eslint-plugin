@@ -43,6 +43,8 @@ Then configure the rules you want to use under the rules section.
 
 ## Rules
 
+Slava Ukraine!
+
 <!-- begin auto-generated rules list -->
 
 - `path-checker`
